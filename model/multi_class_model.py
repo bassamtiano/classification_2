@@ -40,3 +40,4 @@ class MultiClassModel(nn.Module):
         output = self.classifier(output)
         
         return output
+    
