@@ -99,7 +99,7 @@ class MultiClassTrainer(object):
             progress_val = tqdm(self.validation_dataset)
             
             for batch in progress_val:
-                x_input_ids, y = batch
+                x_input_ids, _, _, y = batch
                 
                 # arange text dan label ke memory GPU / CPU
                 x_input_ids = x_input_ids.to(self.device)
