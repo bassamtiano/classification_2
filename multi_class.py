@@ -23,7 +23,7 @@ if __name__ == '__main__':
     mclass_trainer = MultiClassTrainer(dropout = 0.1, 
                                     lr = 2e-5,
                                     max_epoch = 10,
-                                    device = "gpu",
+                                    device = "cuda",
                                     n_class= len(label2id))
     
     mclass_trainer.trainer(train_dataset, validation_dataset, test_dataset)

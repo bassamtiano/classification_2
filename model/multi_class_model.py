@@ -25,22 +25,19 @@ class MultiClassModel(nn.Module):
         # Merubah hasil output ke target jumlah label
         self.classifier = nn.Linear(768, n_out)
         
-    def forward(self, input_ids, attention_mask, token_type_ids):
+    def forward(self, x_input_ids):
         # Mengambil output dari LM
-        bert_out = self.bert(input_ids = input_ids, 
-                             attention_mask = attention_mask,
-                             token_type_ids = token_type_ids)[0]
+        bert_out = self.bert(input_ids = x_input_ids)[0]
         pooler = bert_out[:, 0]
         
-        sys.exit()
         # Menyimpan di memori class lokal
-        # pooler = self.pre_classifier(pooler)
-        # # Stabilisasi
-        # pooler = self.activation(pooler)
-        # # Mecegah monoton
-        # output = self.dropout(pooler)
-        # # Merubah hasil output
-        # output = self.classifier(output)
+        pooler = self.pre_classifier(pooler)
+        # Stabilisasi
+        pooler = self.activation(pooler)
+        # Mecegah monoton
+        output = self.dropout(pooler)
+        # Merubah hasil output
+        output = self.classifier(output)
         
-        # return output
+        return output
     

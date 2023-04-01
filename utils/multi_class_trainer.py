@@ -60,13 +60,12 @@ class MultiClassTrainer(object):
             
             # arange text dan label ke memory GPU / CPU
             x_input_ids = x_input_ids.to(self.device)
+            x_token_type_ids = x_token_type_ids.to(self.device)
+            x_attention_mask = x_attention_mask.to(self.device)
             y = y.to(self.device)
             
-            out = self.model(input_ids = x_input_ids, 
-                             attention_mask = x_attention_mask,
-                             token_type_ids = x_token_type_ids)
+            out = self.model(x_input_ids = x_input_ids)
             
-            sys.exit()
             
             loss = self.criterion(out, target = y.float())
             
